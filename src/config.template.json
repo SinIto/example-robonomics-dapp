@@ -1,0 +1,9 @@
+{
+  "endpoint": "ws://localhost:9944",
+  "types": {
+    "Record": "Vec<u8>",
+    "Parameter": "Bool",
+    "Address": "AccountId",
+    "LookupSource": "AccountId"
+  }
+}
