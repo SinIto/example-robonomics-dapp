@@ -9,23 +9,40 @@
           Account: <b>{{ account }}</b> {{ balance }} |
           <button @click="faucet">faucet</button>
         </p>
+
+        <div>
+          <div class="tabs">
+            <button
+              @click="tab = 'datalog'"
+              :class="{ active: tab === 'datalog' }"
+            >
+              datalog
+            </button>
+          </div>
+          <Datalog v-if="tab === 'datalog'" :api="api" :account="account" />
+        </div>
       </template>
     </template>
   </div>
 </template>
 
 <script>
+import Datalog from "./components/Datalog";
 import { initApi, initAccount, getBalance, faucet } from "./utils/api";
 import { formatBalance } from "@polkadot/util";
 export default {
   name: "App",
+  components: {
+    Datalog
+  },
   data() {
     return {
       load: false,
       api: null,
       account: null,
       balance: 0,
-      error: null
+      error: null,
+      tab: "datalog"
     };
   },
   created() {
@@ -86,5 +103,21 @@ input:focus {
   font-weight: bold;
   text-align: center;
   margin: 10px 0;
+}
+.tabs button {
+  font-size: 14px;
+  padding: 10px 20px;
+  font-weight: bold;
+  background: #ececec;
+  border: 1px solid #aaa;
+}
+.tabs button:hover {
+  background: #bfbfbf;
+}
+.tabs button:last-child {
+  border-left: none;
+}
+.tabs button.active {
+  background: #ced5e2;
 }
 </style>
