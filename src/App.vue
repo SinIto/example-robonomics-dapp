@@ -18,8 +18,15 @@
             >
               datalog
             </button>
+            <button
+              @click="tab = 'launch'"
+              :class="{ active: tab === 'launch' }"
+            >
+              launch
+            </button>
           </div>
           <Datalog v-if="tab === 'datalog'" :api="api" :account="account" />
+          <Launch v-if="tab === 'launch'" :api="api" :account="account" />
         </div>
       </template>
     </template>
@@ -28,12 +35,14 @@
 
 <script>
 import Datalog from "./components/Datalog";
+import Launch from "./components/Launch";
 import { initApi, initAccount, getBalance, faucet } from "./utils/api";
 import { formatBalance } from "@polkadot/util";
 export default {
   name: "App",
   components: {
-    Datalog
+    Datalog,
+    Launch
   },
   data() {
     return {
